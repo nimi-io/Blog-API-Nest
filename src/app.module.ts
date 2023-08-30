@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
+import appConfig from './shared/config/config';
 import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { BlogModule } from './blog/blog.module';
@@ -9,17 +12,20 @@ import { BlogModule } from './blog/blog.module';
   controllers: [AppController],
   providers: [AppService],
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env.local', '.env'],
+    }),
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5000,
-      username: 'postgres',
-      password: 'root',
-      database: 'fintech_test',
+      type: 'postgres', //appConfig().database.type
+      host: appConfig().database.host,
+      port: appConfig().database.port,
+      username: appConfig().database.username,
+      password: appConfig().database.password,
+      database: appConfig().database.name,
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     BlogModule,
   ],
