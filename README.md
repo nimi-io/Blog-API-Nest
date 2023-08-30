@@ -45,6 +45,37 @@ $ pnpm run start:dev
 $ pnpm run start:prod
 ```
 
+## Endpoints
+
+### Get All Blog Posts
+
+- **URL:** `/blog/posts`
+- **Method:** `GET`
+- **Description:** Get a list of all blog posts.
+- **Query Parameters:**
+  - `page` (optional): Page number for pagination.
+  - `limit` (optional): Number of posts per page.
+  - `search` (optional): Search for posts by title or content.
+
+### Get a Specific Blog Post
+
+- **URL:** `/blog/posts/:id`
+- **Method:** `GET`
+- **Description:** Get details of a specific blog post.
+- **Parameters:**
+  - `id`: ID of the blog post.
+
+### Add a New Blog Post
+
+- **URL:** `/blog/posts`
+- **Method:** `POST`
+- **Description:** Create a new blog post.
+- **Request Body:**
+  ```json
+  {
+    "title": "Sample Title",
+    "content": "Lorem ipsum dolor sit amet..."
+  }
 
 ## License
 
